@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Studfile</title> 
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+
+    <div>
+        <a href="/Home/Index" class="navbar-brand title-center">
+            <img src="http://www.stratigent.com/sites/default/files/icon-worker.png" alt="" width="70" height="60" />Studfile
+        </a>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+
+
+    <div class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Profesor"))
+    {
+                <li>@Html.ActionLink("Naslovnica", "Index", "Home")</li>
+                <li>@Html.ActionLink("Kolegij", "Index", "Profesor")</li>
+                <li>@Html.ActionLink("O nama", "Onama", "Home")</li>
+                @Html.Partial("_LoginPartial")
+
+}
+else if (User.IsInRole("Student"))
+{
+                <li>@Html.ActionLink("Naslovnica", "Index", "Home")</li>
+                <li>@Html.ActionLink("Kolegij", "Index", "Student")</li>
+                <li>@Html.ActionLink("O nama", "Onama", "Home")</li>
+                @Html.Partial("_LoginPartial")
+
+
+}
+else
+{
+                <li>@Html.ActionLink("Naslovnica", "Index", "Home")</li>
+                <li>@Html.ActionLink("Profesor", "Index", "Profesor")</li>
+                <li>@Html.ActionLink("Student", "Index", "Student")</li>
+                <li>@Html.ActionLink("O nama", "Onama", "Home")</li>
+
+}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Aleksandar Filipovic, Jelena Galic, Vlatko Ilancic, Monika Raguz, Marija Ravlic  </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        $("#carousel").carousel(
+            {
+                interval: 7000
+            });
+    </script>
+</body>
+</html>

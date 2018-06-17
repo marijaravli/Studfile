@@ -1,0 +1,233 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Novi dizajn */
+
+.navbar-nav > li {
+    border: 1px solid #000000;
+}
+
+.body-content {
+    border: 1px solid #000000;
+    padding: 30px;
+}
+
+.navbar {
+    margin-bottom: -2px;
+}
+
+.carousel-inner {
+    height: 400px;
+}
+
+.pocenta-centar {
+    text-align: center;
+}
+
+.pocenta-centar > h1 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: black;
+    }
+
+.studfile-default-button {
+    background-color: #741B47;
+    color: white;
+}
+.studfile-default-button:hover {
+    background-color: #641B47;
+    color: white;
+}
+
+.navbar-brand {
+    color: #741B47;
+    margin: 0;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+    .navbar-brand:hover {
+    color: #641B47;
+    }
+
+.studfile-default-button-odaberi {
+    background-color: #741B47;
+    color: white;
+    margin-top: 20px;
+    margin-left: 260px;
+    font-size: 20px;
+    
+}
+
+.studfile-default-button-odaberi:hover {
+    background-color: #641B47;
+    color: white;
+}
+
+.btn-default{
+    background-color: #741B47;
+    color: white;
+    margin-top: 20px;
+    margin-left: 110px;
+    font-size: 20px;
+}
+
+.btn-default:hover {
+    background-color: #641B47;
+    color: white;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+.navbar-brand.title-center {
+    width: 100%;
+    text-align: center;
+}
+
+.naslov {
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+.studfile-default-button-unos {
+    background-color: #741B47;
+    color: white;
+    margin-top: 20px;
+    margin-left: 430px;
+    font-size: 20px;
+}
+
+.studfile-default-button-unos:hover {
+    background-color: #641B47;
+    color: white;
+}
+
+.zaglavlje {
+    background-color: #741B47;
+    color: white;
+    
+}
+
+.table-bordered {
+    border: 10px;
+    height: 250px;
+    border-collapse: collapse;
+    
+}
+
+.studfile-default-button-plus {
+    background-color: #741B47;
+    color: white;
+    margin-top: 20px;
+    margin-left: 550px;
+    font-size: 30px;
+    border-radius: 50%;
+    width: 50px;
+}
+
+.studfile-default-button-plus:hover {
+    background-color: #641B47;
+    color: white;
+}
+
+.onama {
+       width: 100%;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+    div.gallery:hover {
+        border: 1px solid #777;
+    }
+
+    div.gallery img {
+        width: 100%;
+        height: auto;
+    }
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+.icon-bar {
+    width: 80%; /* Full-width */
+    background-color: white; /* Dark-grey background */
+    overflow: auto; /* Overflow due to float */
+    margin-left: 220px;
+    
+}
+
+    .icon-bar a {
+        float: left; /* Float links side by side */
+        text-align: center; /* Center-align text */
+        width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+        padding: 12px 0; /* Some top and bottom padding */
+        transition: all 0.3s ease; /* Add transition for hover effects */
+        color: black; /* White text color */
+        font-size: 36px; /* Increased font size */
+    }
+
+        .icon-bar a:hover {
+            color: #741B47; /* Add a hover color */
+        }
+
+.active {
+    color: #641B47;
+}
+
+.tekst {
+    font-size: 16px;
+    font-family:  Arial, sans-serif;
+}
+
+.btn-default-a {
+    background-color: #741B47;
+    color: white;
+    margin-top: 20px;
+    margin-left: 190px;
+    font-size: 20px;
+}
+
+    .btn-default-a:hover {
+        background-color: #641B47;
+        color: white;
+    }

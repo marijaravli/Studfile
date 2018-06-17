@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Studfile.Models.StudentKolegijViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Popis Studenata</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JMBAG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kolegij)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JMBAG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kolegij)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+@*<form action="/" method="post" >
+    <table style="width:50%" class="table-bordered, text-center">
+        <tr class="zaglavlje">
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>JMBAG</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <button type="button" class="studfile-default-button-plus"> + </button>
+</form>*@

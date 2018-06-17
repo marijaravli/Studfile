@@ -1,0 +1,55 @@
+﻿@model Studfile.Models.UnosStudentaViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Unos studenata";
+}
+<h2 class="naslov">Unos studenata - @Model.Kolegij</h2>
+
+<div class="col-xs-12">
+    <form action="test" method="post">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control" } })<br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control" } })<br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Jmbag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Jmbag, new { htmlAttributes = new { @class = "form-control" } })<br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kolegij, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kolegij, new { htmlAttributes = new { @class = "form-control" } })<br />
+            </div>
+        </div>
+        @Html.ActionLink("Unesi", "TablicaStudenti", "Profesor", null, htmlAttributes: new { @class = "btn studfile-default-button-unos" })
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <div class="icon-bar">
+            <a class="active" href="#"><i class="fa fa-user-plus"><br /><div class="tekst">Unos studenata</div></i></a>
+            <a href="#"><i class="fa fa-pencil"><div class="tekst">Unos teme</div></i></a>
+            <a href="#"><i class="fa fa-calendar"><div class="tekst">Unos termina</div></i></a>
+            <a href="#"><i class="fa fa-table"><div class="tekst">Odabrane teme</div></i></a>
+        </div>
+    </form>
+</div>
+
