@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Studfile.Models;
 
 namespace Studfile.Controllers
@@ -20,6 +21,13 @@ namespace Studfile.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                string id = HttpContext.User.Identity.GetUserId();
+                Profesor prof = db.Profesor.Where(p => p.UserId == id).FirstOrDefault();
+                if (prof ==null)
+                {
+                    return RedirectToAction("Create", "Profesor");
+                }
+
                 return View();
             }
             return RedirectToAction("Login", "Account");
@@ -60,10 +68,11 @@ namespace Studfile.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ime,Prezime,KorisnickoIme,Lozinka")] Profesor profesor)
+        public ActionResult Create([Bind(Include = "Id,Ime,Prezime")] Profesor profesor)
         {
             if (ModelState.IsValid)
             {
+                profesor.UserId = HttpContext.User.Identity.GetUserId();
                 db.Profesor.Add(profesor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -144,7 +153,7 @@ namespace Studfile.Controllers
             var model = db.StudentSeminar
                 .Include(s => s.Student)
                 .Include(r => r.Seminar)
-                .Select(x => new StudentKolegijViewModel() { Ime = x.Student.Ime, Prezime = x.Student.Prezime, JMBAG = x.Student.Lozinka, Kolegij = x.Seminar.TemaSeminara, StudentId = x.Student.Id }  );
+                .Select(x => new StudentKolegijViewModel() { Ime = x.Student.Ime, Prezime = x.Student.Prezime, Kolegij = x.Seminar.TemaSeminara, StudentId = x.Student.Id }  );
             return View(model);
         }
 

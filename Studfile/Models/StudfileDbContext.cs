@@ -18,6 +18,10 @@ namespace Studfile.Models
         public DbSet<Seminar> Seminar { get; set; }
         public DbSet<StudentSeminar> StudentSeminar { get; set; }
 
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<StudfileDbContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

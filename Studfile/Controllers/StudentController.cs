@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Studfile.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Studfile.Controllers
 {
@@ -20,10 +21,17 @@ namespace Studfile.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                string id = HttpContext.User.Identity.GetUserId();
+                Student student = db.Student.Where(s => s.UserId == id).FirstOrDefault();
+                if (student == null)
+                {
+                    return RedirectToAction("Create", "Student");
+                }
+
                 return View(db.Student.ToList());
             }
             return RedirectToAction("Login", "Account");
-            
+
         }
 
         // GET: Student/Details/5
@@ -52,10 +60,11 @@ namespace Studfile.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ime,Prezime,UserId,Lozinka")] Student student)
+        public ActionResult Create([Bind(Include = "Id,Ime,Prezime,JMBAG")] Student student)
         {
             if (ModelState.IsValid)
             {
+                student.UserId = HttpContext.User.Identity.GetUserId();
                 db.Student.Add(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
