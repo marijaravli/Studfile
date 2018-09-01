@@ -65,6 +65,11 @@ namespace Studfile.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Type")]
+        public UserType Type { get; set; }
+
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +84,12 @@ namespace Studfile.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public enum UserType
+    {
+        Student,
+        Profesor
     }
 
     public class ResetPasswordViewModel
