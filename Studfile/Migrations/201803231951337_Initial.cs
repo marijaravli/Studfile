@@ -35,7 +35,7 @@ namespace Studfile.Migrations
                 c => new
                 {
                     Id = c.Int(nullable: false, identity: true),
-                    Naziv = c.Int(nullable: false),
+                    Naziv = c.String(nullable: false),
                     MaxVelicinaGrupe = c.Int(defaultValue: 3)
                 })
                 .PrimaryKey(t => t.Id);

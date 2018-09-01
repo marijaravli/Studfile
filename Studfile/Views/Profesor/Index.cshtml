@@ -1,64 +1,53 @@
-﻿@model Studfile.Models.KolegijViewModel
+﻿@model IEnumerable<Studfile.Models.KolegijViewModel>
+
 @{
-                ViewBag.Title = "PopisKolegija";
+    ViewBag.Title = "PopisKolegija";
 }
-@*<form method="POST" action="test">*@
-    <h2>Popis kolegija</h2>
-    <div class="tekst">
-       @using (Html.BeginForm("UnosStudenata", "Profesor"))
-       {
-        @Html.AntiForgeryToken()
-        <li>
-            <input value="Informatika" type="radio" name="kolegij" /> Informatika
-        </li>
-        <li>
-            <input value="Razvoj poslovnih informacija" type="radio" name="kolegij" /> Razvoj poslovnih informacija
-        </li>
-        <li>
-            <input value="Poslovne simulacije" type="radio" name="kolegij" /> Poslovne simulacije
+<h2>Popis kolegija</h2>
 
-        </li>
-        <li>
-            <input value="Sustavi poslovne inteligencije" type="radio" name="kolegij" /> Sustavi poslovne inteligencije
-        </li>
-        <li>
-            <input value="Digitalno gospodarstvo" type="radio" name="kolegij" /> Digitalno gospodarstvo
-        </li>
-        <li>
-            <input value="ICT u bankarstvu" type="radio" name="kolegij" /> ICT u bankarstvu
-        </li>
-        <li>
-            <input value="Upravljanje informacijskim resursima" type="radio" name="kolegij" /> Upravljanje informacijskim resursima
-        </li>
-        <li>
-            <input value="Oblikovanje i implementacija IS-a" type="radio" name="kolegij" /> Oblikovanje i implementacija IS-a
-        </li>
-        <li>
-            <input value="Organizacija informacijskih sustava u financijama i računovodstvu" type="radio" name="kolegij" /> Organizacija informacijskih sustava u financijama i računovodstvu
-        </li>
-        <li>
-            <input value="Baza podataka i poslovni proces" type="radio" name="kolegij" /> Baza podataka i poslovni procesi
-        </li>
-        <li>
-            <input value="Elektroničko i mobilno poslovanje" type="radio" name="kolegij" /> Elektroničko i mobilno poslovanje
-        </li>
-        <input type="submit" value="Odaberi" class="btn studfile-default-button-odaberi" />
-       }
-    </div>
-    @*<button type="submit" class="studfile-default-button-odaberi"> Odaberi </button>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaksimalnaVelicinaGrupe)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaksimalnaVelicinaGrupe)
+                </td>
+                <td>
+                    @Html.ActionLink("Pregled", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Obriši", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td colspan="3">Niste unijeli niti jedan kolegij</td></tr>
+    }
+</table>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="icon-bar">
-        <a class="active" href="#"><i class="fa fa-user-plus"><br/><div class="tekst">Unos studenata</div></i></a>
-        <a href="#"><i class="fa fa-pencil"><div class="tekst">Unos teme</div></i></a>
-        <a href="#"><i class="fa fa-calendar"><div class="tekst">Unos termina</div></i></a>
-        <a href="#"><i class="fa fa-table"><div class="tekst">Odabrane teme</div></i></a>
-    </div>
-    
-@*</form>*@
+<div class="icon-bar">
+    <a href="@Url.Action("Create", "Kolegij")"><i class="fa fa-book"><br /><span class="tekst">Unos kolegija</span></i></a>
+    <a href="#"><i class="fa fa-user-plus"><br /><span class="tekst">Unos studenata</span></i></a>
+    <a href="#"><i class="fa fa-pencil"><br /><span class="tekst">Unos teme</span></i></a>
+    <a href="#"><i class="fa fa-calendar"><br /><span class="tekst">Unos termina</span></i></a>
+    <a href="#"><i class="fa fa-table"><br /><span class="tekst">Odabrane teme</span></i></a>
+</div>
+
+

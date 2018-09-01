@@ -28,7 +28,19 @@ namespace Studfile.Controllers
                     return RedirectToAction("Create", "Profesor");
                 }
 
-                return View();
+                IEnumerable<KolegijViewModel> kolegiji = db.Kolegij
+                    .Join(
+                        db.KolegijProfesor,
+                        kolegij => kolegij.Id,
+                        kolegijProfesor => kolegijProfesor.KolegijId,
+                        (kolegij, kolegijProfesor) => new { Kolegij = kolegij, KolegijProfesor = kolegijProfesor }
+                    )
+                    .Where(joinedTables => joinedTables.KolegijProfesor.ProfesorId == prof.Id)
+                    .Select(t => t.Kolegij)
+                    .ToList()
+                    .Select(k => new KolegijViewModel { Id = k.Id, Naziv = k.Naziv, MaksimalnaVelicinaGrupe = k.MaxVelicinaGrupe });
+
+                return View(kolegiji);
             }
             return RedirectToAction("Login", "Account");
         }

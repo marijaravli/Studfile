@@ -17,6 +17,9 @@ namespace Studfile.Models
         public DbSet<Student> Student { get; set; }
         public DbSet<Seminar> Seminar { get; set; }
         public DbSet<StudentSeminar> StudentSeminar { get; set; }
+        public DbSet<Kolegij> Kolegij { get; set; }
+        public DbSet<KolegijProfesor> KolegijProfesor { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

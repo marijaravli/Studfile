@@ -192,7 +192,7 @@ div.desc {
     width: 80%; /* Full-width */
     background-color: white; /* Dark-grey background */
     overflow: auto; /* Overflow due to float */
-    margin-left: 220px;
+    margin: 0 auto;
     
 }
 
@@ -215,6 +215,7 @@ div.desc {
 }
 
 .tekst {
+    padding: 10px 0px;
     font-size: 16px;
     font-family:  Arial, sans-serif;
 }
