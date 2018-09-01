@@ -25,7 +25,7 @@ namespace Studfile.Migrations
                     Id = c.Int(nullable: false, identity: true),
                     Ime = c.String(nullable: false),
                     Prezime = c.String(nullable: false),
-                    JMBAG = c.Int(nullable: false),
+                    JMBAG = c.String(nullable: false),
                     UserId = c.String(nullable: false)
                 })
                 .PrimaryKey(t => t.Id);
@@ -126,7 +126,7 @@ namespace Studfile.Migrations
                 })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Seminars", t => t.SeminarId, cascadeDelete: true)
-                .ForeignKey("dbo.StudentTims", t => t.TimId)
+                .ForeignKey("dbo.Tims", t => t.TimId)
                 .ForeignKey("dbo.SeminarDatums", t => t.VrijemeIzlaganjaId)
                 .Index(t => t.TimId)
                 .Index(t => t.VrijemeIzlaganjaId)
@@ -172,7 +172,7 @@ namespace Studfile.Migrations
             // Dropping tables
             DropTable("dbo.Profesors");
             DropTable("dbo.Students");
-            DropTable("dbo.Courses");
+            DropTable("dbo.Kolegijs");
             DropTable("dbo.Tims");
             DropTable("dbo.StudentTims");
             DropTable("dbo.KolegijProfesors");
