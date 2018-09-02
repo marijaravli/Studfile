@@ -13,6 +13,7 @@ namespace Studfile.Models
 
         public string Naziv { get; set; }
 
+        [Display (Name = "Maksimalna veličina grupe")]
         public int MaksimalnaVelicinaGrupe { get; set; }
     }
 }
