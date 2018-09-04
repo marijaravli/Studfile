@@ -17,6 +17,7 @@ namespace Studfile.Models
         public DbSet<Student> Student { get; set; }
         public DbSet<Seminar> Seminar { get; set; }
         public DbSet<StudentSeminar> StudentSeminar { get; set; }
+        public DbSet<SeminarDatum> SeminarDatum { get; set; }
         public DbSet<Kolegij> Kolegij { get; set; }
         public DbSet<KolegijProfesor> KolegijProfesor { get; set; }
 
@@ -26,5 +27,6 @@ namespace Studfile.Models
             Database.SetInitializer<StudfileDbContext>(null);
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

@@ -194,6 +194,7 @@
     <Compile Include="Controllers\KolegijController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
+    <Compile Include="Controllers\SeminarDatumController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,7 @@
       <DependentUpon>201803231951337_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\SeminarDatum.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kolegij.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Models\Profesor.cs" />
     <Compile Include="Models\Seminar.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\ViewModels\SeminarDatumViewModels.cs" />
     <Compile Include="Models\ViewModels\StudentKolegijViewModel.cs" />
     <Compile Include="Models\StudentSeminar.cs" />
     <Compile Include="Models\StudfileDbContext.cs" />
@@ -292,6 +295,8 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Profesor\TerminClanovi.cshtml" />
     <Content Include="Views\Kolegij\Create.cshtml" />
+    <Content Include="Views\SeminarDatum\Create.cshtml" />
+    <Content Include="Views\SeminarDatum\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
