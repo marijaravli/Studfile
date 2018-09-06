@@ -1,0 +1,40 @@
+﻿@model Studfile.Models.SeminarDatum
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Obriši</h2>
+
+<h3>Jeste li sigurni da želite obrisati ponuđeni termin?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TerminIzlaganja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerminIzlaganja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KolegijId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KolegijId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-default" /> |
+            @Html.ActionLink("Natrag na ponuđene termine izlaganja", "Index")
+        </div>
+    }
+</div>

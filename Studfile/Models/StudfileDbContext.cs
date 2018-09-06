@@ -28,5 +28,6 @@ namespace Studfile.Models
             base.OnModelCreating(modelBuilder);
         }
 
+        public System.Data.Entity.DbSet<Studfile.Models.KolegijStudent> KolegijStudents { get; set; }
     }
 }

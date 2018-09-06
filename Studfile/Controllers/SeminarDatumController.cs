@@ -39,6 +39,42 @@ namespace Studfile.Controllers
             return View();
         }
 
+        // GET: SeminarDatum/CreateForKolegij/5
+        [Authorize(Roles = "Profesor")]
+
+        public ActionResult CreateForKolegij(int Id)
+        {
+
+            var seminarDatum = new SeminarDatum { TerminIzlaganja = DateTime.Now, KolegijId = Id };
+
+           
+
+            return View(seminarDatum);
+        }
+
+        // POST: SeminarDatum/CreateForKolegij
+        [Authorize(Roles = "Profesor")]
+
+        [HttpPost]
+        public ActionResult CreateForKolegij([Bind(Include = "Id,TerminIzlaganja,KolegijId")] SeminarDatum seminarDatum)
+        {
+            if (ModelState.IsValid)
+            {
+                SeminarDatum newseminarDatum = db.SeminarDatum.Add(seminarDatum);
+                db.SaveChanges();
+
+
+                return RedirectToAction("Index");
+            }
+
+
+            {
+                return View();
+            }
+        }
+
+
+
         // GET: SeminarDatum/Create
         [Authorize(Roles = "Profesor")]
 
@@ -68,6 +104,8 @@ namespace Studfile.Controllers
             return View(seminarDatumViewModels);
         }
 
+
+        
         // POST: SeminarDatum/Create
         [Authorize(Roles = "Profesor")]
 

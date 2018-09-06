@@ -15,6 +15,7 @@ namespace Studfile.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime TerminIzlaganja { get; set; }
 
+        [Display (Name = "Kolegij")]
         public int KolegijId { get; set; }
     }
 }

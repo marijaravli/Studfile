@@ -192,6 +192,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KolegijController.cs" />
+    <Compile Include="Controllers\KolegijStudentController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Controllers\SeminarDatumController.cs" />
@@ -204,11 +205,13 @@
       <DependentUpon>201803231951337_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\KolegijStudent.cs" />
     <Compile Include="Models\SeminarDatum.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kolegij.cs" />
     <Compile Include="Models\KolegijProfesor.cs" />
+    <Compile Include="Models\ViewModels\KolegijStudentViewModel.cs" />
     <Compile Include="Models\ViewModels\KolegijViewModel.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Profesor.cs" />
@@ -297,6 +300,10 @@
     <Content Include="Views\Kolegij\Create.cshtml" />
     <Content Include="Views\SeminarDatum\Create.cshtml" />
     <Content Include="Views\SeminarDatum\Index.cshtml" />
+    <Content Include="Views\KolegijStudent\Create.cshtml" />
+    <Content Include="Views\SeminarDatum\Edit.cshtml" />
+    <Content Include="Views\SeminarDatum\Delete.cshtml" />
+    <Content Include="Views\SeminarDatum\CreateForKolegij.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

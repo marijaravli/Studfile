@@ -84,6 +84,7 @@ namespace Studfile.Migrations
                     Id = c.Int(nullable: false, identity: true),
                     StudentId = c.Int(nullable: false),
                     KolegijId = c.Int(nullable: false),
+
                 })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Students", t => t.StudentId, cascadeDelete: true)
