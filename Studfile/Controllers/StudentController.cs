@@ -8,10 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using Studfile.Models;
 using Microsoft.AspNet.Identity;
+using Studfile.Models.ViewModels;
 
 namespace Studfile.Controllers
 {
-    [Authorize(Roles = "Student")]
     public class StudentController : Controller
     {
         private StudfileDbContext db = new StudfileDbContext();
@@ -129,6 +129,42 @@ namespace Studfile.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Student/AddToKolegij/1
+        public ActionResult AddToKolegij(int id)
+        {
+            IEnumerable<SelectListItem> students = db.Student.ToList()
+                .Select(s => new SelectListItem { Text = s.Ime +" " + s.Prezime + " (" +s.JMBAG +")", Value = s.Id.ToString() });
+
+
+            KolegijStudent kolegijStudent = new KolegijStudent { KolegijId = id };
+            StudentViewModel studentViewModel = new StudentViewModel { students = students, kolegijStudent = kolegijStudent };
+            return View(studentViewModel);
+        }
+
+
+        // POST: Student/AddToKolegij/1
+        [Authorize(Roles = "Profesor")]
+
+        [HttpPost]
+        public ActionResult AddToKolegij([Bind(Include = "Id,StudentId,KolegijId")] KolegijStudent kolegijStudent)
+        {
+            if (ModelState.IsValid)
+            {
+                KolegijStudent newkolegijStudent = db.KolegijStudents.Add(kolegijStudent);
+                db.SaveChanges();
+
+
+                return RedirectToAction("Index");
+            }
+
+
+            {
+                return View();
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

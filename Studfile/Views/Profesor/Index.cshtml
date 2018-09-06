@@ -30,7 +30,7 @@
                     @*@Html.ActionLink("Pregled", "Details", new { id = item.Id }) | *@
                     @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Obriši", "Delete", new { id = item.Id }) |
-                    <a href="@Url.Action("Create", "KolegijStudent")"><i class="fa fa-user-plus"></i></a> |
+                    <a href="@Url.Action("AddToKolegij", "Student", new {  id = item.Id})"><i class="fa fa-user-plus"></i></a> |
                     <a href="@Url.Action("CreateForKolegij", "Seminar", new { id = item.Id })"><i class="fa fa-pencil"></i></a> |
                     <a href="@Url.Action("CreateForKolegij", "SeminarDatum", new { id = item.Id })"><i class="fa fa-calendar"></i></a> 
                 </td>

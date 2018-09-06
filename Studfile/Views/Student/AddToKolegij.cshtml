@@ -1,0 +1,41 @@
+﻿@model Studfile.Models.ViewModels.StudentViewModel
+
+@{
+    ViewBag.Title = "AddToKolegij";
+}
+
+<h2>AddToKolegij</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>KolegijStudent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.kolegijStudent.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.kolegijStudent.StudentId, new SelectList(Model.students, "Value", "Text"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(moodel => Model.kolegijStudent.KolegijId)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

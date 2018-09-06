@@ -20,6 +20,7 @@ namespace Studfile.Models
         public DbSet<SeminarDatum> SeminarDatum { get; set; }
         public DbSet<Kolegij> Kolegij { get; set; }
         public DbSet<KolegijProfesor> KolegijProfesor { get; set; }
+        public DbSet<KolegijStudent> KolegijStudents { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,6 +29,5 @@ namespace Studfile.Models
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<Studfile.Models.KolegijStudent> KolegijStudents { get; set; }
     }
 }
