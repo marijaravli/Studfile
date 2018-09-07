@@ -1,4 +1,5 @@
 ﻿using Studfile.Models;
+using Studfile.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +29,17 @@ namespace Studfile.Controllers
         // GET: Seminar/CreateForKolegij
         public ActionResult CreateForKolegij(int id)
         {
-            var seminar = new Seminar { KolegijId = id };
-            return View(seminar);
+            IEnumerable<Seminar> seminariTrazenogKolegija = db.Seminar
+                .Where(s => s.KolegijId == id);
+
+            Seminar seminar = new Seminar { KolegijId = id };
+            SeminarViewModel seminarViewModel = new SeminarViewModel
+            {
+                seminar = seminar,
+                seminariKolegija = seminariTrazenogKolegija.ToList()
+            };
+
+            return View(seminarViewModel);
         }
 
         // POST: Seminar/CreateForKolegij
@@ -42,14 +52,14 @@ namespace Studfile.Controllers
                 db.SaveChanges();
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("CreateForKolegij", new { id = seminar.KolegijId });
+
             }
 
+            return RedirectToAction("CreateForKolegij", new { id = seminar.KolegijId });
 
-            {
-                return View();
-            }
         }
+
 
         // GET: Seminar/Edit/5
         public ActionResult Edit(int id)
@@ -83,16 +93,13 @@ namespace Studfile.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Seminar seminar = db.Seminar
+                .Where(s => s.Id == id).First();
+            db.Seminar.Remove(seminar);
+            db.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("CreateForKolegij", new { id = seminar.KolegijId });
         }
+
     }
 }

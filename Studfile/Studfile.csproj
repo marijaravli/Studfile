@@ -219,6 +219,7 @@
     <Compile Include="Models\Profesor.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\ViewModels\SeminarDatumViewModels.cs" />
+    <Compile Include="Models\ViewModels\SeminarViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentKolegijViewModel.cs" />
     <Compile Include="Models\StudentSeminar.cs" />
     <Compile Include="Models\StudfileDbContext.cs" />

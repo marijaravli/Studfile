@@ -38,8 +38,13 @@ namespace Studfile.Controllers
                     .Where(joinedTables => joinedTables.KolegijProfesor.ProfesorId == prof.Id)
                     .Select(t => t.Kolegij)
                     .ToList()
-                    .Select(k => new KolegijViewModel { Id = k.Id, Naziv = k.Naziv, MaksimalnaVelicinaGrupe = k.MaxVelicinaGrupe });
-
+                    .Select(k => new KolegijViewModel {
+                        Id = k.Id,
+                        Naziv = k.Naziv,
+                        MaksimalnaVelicinaGrupe = k.MaxVelicinaGrupe,
+                        Seminar = k.Seminar,
+                        BrojStudenata = db.KolegijStudents.Where(ks => ks.KolegijId == k.Id).Count()
+                    });
                 return View(kolegiji);
             }
             return RedirectToAction("Login", "Account");

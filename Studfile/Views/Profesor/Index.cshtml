@@ -5,6 +5,10 @@
 }
 <h2 class="h2">Popis kolegija</h2>
 
+<div class="ml">
+    @Html.ActionLink("Unesi novi kolegij", "Create", "Kolegij")
+</div>
+
 <table class="table">
     <tr class="th">
         <th>
@@ -12,6 +16,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MaksimalnaVelicinaGrupe)
+        </th>
+        <th>
+            Broj seminara
+        </th>
+        <th>
+            Broj studenata
         </th>
         <th></th>
     </tr>
@@ -27,12 +37,17 @@
                     @Html.DisplayFor(modelItem => item.MaksimalnaVelicinaGrupe)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Pregled", "Details", new { id = item.Id }) | *@
+                    @Html.DisplayFor(modelItem => item.Seminar.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrojStudenata)
+                </td>
+                <td>
                     @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Obriši", "Delete", new { id = item.Id }) |
                     <a href="@Url.Action("AddToKolegij", "Student", new {  id = item.Id})"><i class="fa fa-user-plus"></i></a> |
                     <a href="@Url.Action("CreateForKolegij", "Seminar", new { id = item.Id })"><i class="fa fa-pencil"></i></a> |
-                    <a href="@Url.Action("CreateForKolegij", "SeminarDatum", new { id = item.Id })"><i class="fa fa-calendar"></i></a> 
+                    <a href="@Url.Action("CreateForKolegij", "SeminarDatum", new { id = item.Id })"><i class="fa fa-calendar"></i></a>
                 </td>
             </tr>
         }
@@ -42,9 +57,7 @@
         <tr><td colspan="3">Niste unijeli niti jedan kolegij</td></tr>
     }
 </table>
-<div class="ml">
-    @Html.ActionLink("Unesi novi kolegij", "Create", "Kolegij")
-</div>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -54,5 +67,3 @@
 
         <a href="#"><i class="fa fa-table"><br /><span class="tekst">Odabrane teme</span></i></a>
     </div>*@
-
-

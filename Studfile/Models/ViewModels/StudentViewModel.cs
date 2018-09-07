@@ -11,5 +11,7 @@ namespace Studfile.Models.ViewModels
         public IEnumerable<SelectListItem> students { get; set; }
         public KolegijStudent kolegijStudent { get; set; }
 
+        public IEnumerable<Student> studentiNaKolegiju { get; set; }
+
     }
 }

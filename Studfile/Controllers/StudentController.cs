@@ -133,12 +133,28 @@ namespace Studfile.Controllers
         // GET: Student/AddToKolegij/1
         public ActionResult AddToKolegij(int id)
         {
-            IEnumerable<SelectListItem> students = db.Student.ToList()
-                .Select(s => new SelectListItem { Text = s.Ime +" " + s.Prezime + " (" +s.JMBAG +")", Value = s.Id.ToString() });
+            IEnumerable<Student> studentiNaTrazenomKolegiju = db.Student
+                  .Join(
+                      db.KolegijStudents,
+                      s => s.Id,
+                      ks => ks.StudentId,
+                      (s, ks) => new { student = s, kolegijId = ks.KolegijId }
+                  )
+                  .Where(studentKolegijId => studentKolegijId.kolegijId == id)
+                  .Select(studentKolegijId => studentKolegijId.student);
 
+            IEnumerable<SelectListItem> studentiNisuNaKolegiju = db.Student
+                .Where(s => !studentiNaTrazenomKolegiju.Select(ss => ss.Id).Contains(s.Id))
+                .ToList()
+                .Select(s => new SelectListItem { Text = s.Ime + " " + s.Prezime + " (" + s.JMBAG + ")", Value = s.Id.ToString() });
 
             KolegijStudent kolegijStudent = new KolegijStudent { KolegijId = id };
-            StudentViewModel studentViewModel = new StudentViewModel { students = students, kolegijStudent = kolegijStudent };
+            StudentViewModel studentViewModel = new StudentViewModel
+            {
+                students = studentiNisuNaKolegiju,
+                kolegijStudent = kolegijStudent,
+                studentiNaKolegiju = studentiNaTrazenomKolegiju.ToList()
+            };
             return View(studentViewModel);
         }
 
@@ -153,18 +169,22 @@ namespace Studfile.Controllers
             {
                 KolegijStudent newkolegijStudent = db.KolegijStudents.Add(kolegijStudent);
                 db.SaveChanges();
-
-
-                return RedirectToAction("Index");
             }
+            return RedirectToAction("AddToKolegij", new { id = kolegijStudent.KolegijId });
 
-
-            {
-                return View();
-            }
         }
 
+        //POST: Student/RemoveFromKolegij/1
+        [HttpPost]
+        public ActionResult RemoveFromKolegij(int kolegijId, int studentId)
+        {
+            KolegijStudent kolegijStudent = db.KolegijStudents.Where(ks => ks.KolegijId == kolegijId && ks.StudentId == studentId).First();
+            db.KolegijStudents.Remove(kolegijStudent);
+            db.SaveChanges();
 
+            return RedirectToAction("AddToKolegij", new { id = kolegijId });
+
+        }
 
         protected override void Dispose(bool disposing)
         {

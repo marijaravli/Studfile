@@ -11,8 +11,6 @@ namespace Studfile.Models
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public string UserId{ get; set; }
-
-        public virtual ICollection<Seminar> Seminar { get; set; }
     }
 
     
