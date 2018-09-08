@@ -44,12 +44,17 @@ namespace Studfile.Controllers
 
         public ActionResult CreateForKolegij(int Id)
         {
+            IEnumerable<SeminarDatum> datumKolegij = db.SeminarDatum
+                .Where(s => s.KolegijId == Id);
 
-            var seminarDatum = new SeminarDatum { TerminIzlaganja = DateTime.Now, KolegijId = Id };
+            SeminarDatum seminarDatum = new SeminarDatum { KolegijId = Id, TerminIzlaganja = DateTime.Now};
+            SeminarDatumViewModels seminarDatumViewModels = new SeminarDatumViewModels
+            {
+                seminarDatum = seminarDatum,
+                seminarDatumKolegij = datumKolegij.ToList()
+            };
 
-           
-
-            return View(seminarDatum);
+            return View(seminarDatumViewModels);
         }
 
         // POST: SeminarDatum/CreateForKolegij
@@ -64,13 +69,11 @@ namespace Studfile.Controllers
                 db.SaveChanges();
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("CreateForKolegij", new { id = seminarDatum.KolegijId });
             }
 
 
-            {
-                return View();
-            }
+            return RedirectToAction("CreateForKolegij", new { id = seminarDatum.KolegijId });
         }
 
 
@@ -105,7 +108,7 @@ namespace Studfile.Controllers
         }
 
 
-        
+
         // POST: SeminarDatum/Create
         [Authorize(Roles = "Profesor")]
 
@@ -159,16 +162,13 @@ namespace Studfile.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            SeminarDatum seminarDatum = db.SeminarDatum
+                .Where(sd => sd.Id == id).First();
+            db.SeminarDatum.Remove(seminarDatum);
+            db.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("CreateForKolegij", new { id = seminarDatum.KolegijId });
         }
     }
 }
+

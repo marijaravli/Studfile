@@ -6,52 +6,54 @@
 
 <h2>Upisivanje teme seminarskog rada</h2>
 
-    
-    <div class="form-horizontal">
-        <hr />
-        <div class="row">
-            <div class="col-md-6">
-                @using (Html.BeginForm()) 
-                {
-                    @Html.AntiForgeryToken()
 
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.seminar.TemaSeminara, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.seminar.TemaSeminara, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.seminar.TemaSeminara, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        @Html.HiddenFor(model => model.seminar.KolegijId)
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Spremi" class="btn btn-default" />
-                            </div>
-                        </div>
-                    
-                }
-            </div>
+<div class="form-horizontal">
+    <hr />
+    <div class="row">
         <div class="col-md-6">
-            <h3>Teme seminara</h3>
-
-            @foreach (var item in Model.seminariKolegija)
+            @using (Html.BeginForm())
             {
-                using (Html.BeginForm("Delete", "Seminar", new { id = item.Id }))
-                {
-                <li>
-                    - @item.TemaSeminara <input type="submit" value="Ukloni" class="btn-sm btn-default" />
-                </li>
-                }
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.seminar.TemaSeminara, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.seminar.TemaSeminara, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.seminar.TemaSeminara, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.seminar.KolegijId)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Spremi" class="btn btn-default" />
+                    </div>
+                </div>
+
             }
         </div>
+        <div class="col-md-6">
+            <h3>Teme seminara</h3>
+            <ul>
+
+                @foreach (var item in Model.seminariKolegija)
+                {
+                    using (Html.BeginForm("Delete", "Seminar", new { id = item.Id }))
+                    {
+                        <li>
+                            - @item.TemaSeminara <input type="submit" value="Ukloni" class="btn-sm btn-default" />
+                        </li>
+                    }
+                }
+            </ul>
         </div>
+    </div>
 
-<div>
-    @Html.ActionLink("Natrag na popis kolegija", "Index", "Profesor")
-</div>
+    <div>
+        @Html.ActionLink("Natrag na popis kolegija", "Index", "Profesor")
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

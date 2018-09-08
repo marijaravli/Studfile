@@ -10,6 +10,8 @@ namespace Studfile.Models.ViewModels
     {
         public SeminarDatum seminarDatum { get; set; }
 
+        public IEnumerable<SeminarDatum> seminarDatumKolegij { get; set; }
+
         public IEnumerable<SelectListItem> kolegiji { get; set; }
     }
 }
