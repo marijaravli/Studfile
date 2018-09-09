@@ -1,0 +1,113 @@
+﻿@model Studfile.Models.ViewModels.OdabraniKolegijViewModel
+
+@{
+    ViewBag.Title = "OdabraniKolegij";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.kolegij.Naziv</h2>
+
+<div>
+    @Html.ActionLink("Natrag na popis kolegija", "Index")
+</div>
+
+<hr />
+<div class="row">
+    <div class="form-horizontal col-md-5">
+
+        @if (Model.tim != null)
+        {
+
+            <h4>Tim: <b>@Model.tim.Naziv</b></h4>
+            <h4>Članovi:</h4>
+            <ul>
+                @foreach (var student in Model.clanoviTima)
+                {
+                    <li> - @student.Ime @student.Prezime</li>
+                }
+            </ul>
+
+            @Html.ActionLink("Uredi", "UrediTim", "Tim", new { kolegijId = Model.kolegij.Id }, new { @class = "btn-sm btn-default btn-1" })
+        }
+        else
+        {
+            <h4>Nemaš tim!</h4>
+            @Html.ActionLink("Kreiraj tim", "UrediTim", "Tim", new { kolegijId = Model.kolegij.Id }, new { @class = "btn btn-default" })
+        }
+        <br />
+        <br />
+        @if (Model.seminar == null)
+        {
+            <div><h4>Tema seminara:</h4> <b>Seminar nije odabran</b></div>
+        }
+        else
+        {
+            <div><h4>Tema seminara:</h4><b>@Model.seminar.TemaSeminara</b></div>
+        }
+        @if (Model.seminarDatum == null)
+        {
+            <div><h4>Termin izlaganja:</h4> <b>Nije odabran datum prezentiranja</b></div>
+        }
+        else
+        {
+            <div><h4>Termin izlaganja:</h4> <b>@Model.seminarDatum.TerminIzlaganja.Day / @Model.seminarDatum.TerminIzlaganja.Month / @Model.seminarDatum.TerminIzlaganja.Year</b></div>
+        }
+    </div>
+    @if (Model.tim != null)
+    {
+    <div class="col-md-7">
+        <h3>Odaberi novu temu i termin seminara</h3>
+        @using (Html.BeginForm("SpremiTimSeminarDatumSeminar", "Student"))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.timSeminarDatumSeminar.SeminarId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.dostupniSeminari.Count() > 0)
+            {
+                @Html.DropDownListFor(model => model.timSeminarDatumSeminar.SeminarId, new SelectList(Model.dostupniSeminari, "Value", "Text"), new { @class = "form-control margine" })
+        }
+        else
+        {
+            <div class="col-md-12">Nema dostupnih seminara.</div>
+    }
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.timSeminarDatumSeminar.VrijemeIzlaganjaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.dostupniTermini.Count() > 0)
+            {
+                @Html.DropDownListFor(model => model.timSeminarDatumSeminar.VrijemeIzlaganjaId, new SelectList(Model.dostupniTermini, "Value", "Text"), new { @class = "form-control margine-1" })
+        }
+        else
+        {
+            <div class="col-md-12">Nema dostupnih termina.</div>
+    }
+            </div>
+        </div>
+
+        @Html.HiddenFor(moodel => Model.timSeminarDatumSeminar.TimId)
+    if (Model.dostupniSeminari.Count() > 0 && Model.dostupniTermini.Count() > 0)
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Odaberi" class="btn btn-default btn-1" />
+            </div>
+        </div>
+}
+
+
+}
+
+    </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

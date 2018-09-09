@@ -9,7 +9,7 @@
 
 
 <div class="form-horizontal">
-    <h4>Odaberite termin izlaganja seminara i kolegij za koji dodajete termin.</h4>
+    <h4>Odaberite termin izlaganja seminara.</h4>
     <hr />
     <div class="row">
         <div class="col-md-6">
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.seminarDatum.TerminIzlaganja, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.seminarDatum.TerminIzlaganja, new { htmlAttributes = new { @class = "form-control", @min = "2018-09-01" } })
+                        @Html.EditorFor(model => model.seminarDatum.TerminIzlaganja, new { htmlAttributes = new { @class = "form-control margine", @min = "2018-09-01" } })
                         @Html.ValidationMessageFor(model => model.seminarDatum.TerminIzlaganja, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -29,7 +29,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Spremi" class="btn btn-default" />
+                        <input type="submit" value="Spremi" class="btn btn-default btn-1" />
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
             <h3>Termini izlaganja seminara</h3>
             <table>
                 <tr>
-                    <th>Termin</th>
+                    <th>Ponuđeni termini</th>
                     <th></th>
                 </tr>
                 @foreach (var item in Model.seminarDatumKolegij)

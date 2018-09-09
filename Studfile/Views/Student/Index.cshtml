@@ -1,21 +1,15 @@
-﻿@model IEnumerable<Studfile.Models.Student>
+﻿@model IEnumerable<Studfile.Models.ViewModels.KolegijWithSeminarViewModel>
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Pregled kolegija i tema</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Ime)
+            @Html.DisplayNameFor(model => model.kolegij.Naziv)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Prezime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JMBAG)
+            @Html.DisplayNameFor(model => model.seminar.TemaSeminara)
         </th>
         <th></th>
     </tr>
@@ -23,18 +17,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Ime)
+                @Html.DisplayFor(modelItem => item.kolegij.Naziv)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Prezime)
+                @Html.DisplayFor(modelItem => item.seminar.TemaSeminara)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.JMBAG)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a href="@Url.Action("OdaberiKolegij", new { kolegijId = item.kolegij.Id })">Odaberi kolegij</a>
             </td>
         </tr>
     }

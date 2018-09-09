@@ -198,6 +198,7 @@
     <Compile Include="Controllers\SeminarController.cs" />
     <Compile Include="Controllers\SeminarDatumController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TimController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,15 +210,21 @@
     <Compile Include="Models\KolegijStudent.cs" />
     <Compile Include="Models\Seminar.cs" />
     <Compile Include="Models\SeminarDatum.cs" />
+    <Compile Include="Models\StudentTim.cs" />
+    <Compile Include="Models\Tim.cs" />
+    <Compile Include="Models\TimSeminarDatumSeminar.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kolegij.cs" />
     <Compile Include="Models\KolegijProfesor.cs" />
     <Compile Include="Models\ViewModels\KolegijStudentViewModel.cs" />
     <Compile Include="Models\ViewModels\KolegijViewModel.cs" />
+    <Compile Include="Models\ViewModels\KolegijWithSeminarViewModel.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Profesor.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\ViewModels\OdabraniKolegijViewModel.cs" />
+    <Compile Include="Models\ViewModels\SeminarDatumListViewModel.cs" />
     <Compile Include="Models\ViewModels\SeminarDatumViewModels.cs" />
     <Compile Include="Models\ViewModels\SeminarViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentKolegijViewModel.cs" />
@@ -225,6 +232,7 @@
     <Compile Include="Models\StudfileDbContext.cs" />
     <Compile Include="Models\ViewModels\StudentViewModel.cs" />
     <Compile Include="Models\ViewModels\UnosStudentaViewModel.cs" />
+    <Compile Include="Models\ViewModels\UrediTimViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -310,6 +318,9 @@
     <Content Include="Views\Seminar\CreateForKolegij.cshtml" />
     <Content Include="Views\Seminar\Index.cshtml" />
     <Content Include="Views\Student\AddToKolegij.cshtml" />
+    <Content Include="Views\Tim\Create.cshtml" />
+    <Content Include="Views\Tim\UrediTim.cshtml" />
+    <Content Include="Views\Student\OdaberiKolegij.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

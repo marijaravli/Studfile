@@ -7,64 +7,74 @@
 <h2>Upisivanje studenata u kolegij</h2>
 
 
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        <div class="row">
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
             <div class="col-md-6">
                 <h6>Odaberite studenta kojeg želite upisati u kolegij te potvrdite pritiskom na gumb "Upiši".</h6>
                 @if (Model.students.Count() > 0)
-    {
+                {
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.kolegijStudent.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.kolegijStudent.StudentId, new SelectList(Model.students, "Value", "Text"), new { @class = "form-control" })
-                </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.kolegijStudent.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.kolegijStudent.StudentId, new SelectList(Model.students, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(moodel => Model.kolegijStudent.KolegijId)
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Upiši" class="btn btn-default btn-1" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-12">Dodali ste sve registrirane studente na kolegij.</div>
+                }
+
             </div>
-
-            @Html.HiddenFor(moodel => Model.kolegijStudent.KolegijId)
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Upiši" class="btn btn-default btn-1" />
-                </div>
-            </div>
-}
-else
-{
-            <div class="col-md-12">Dodali ste sve registrirane studente na kolegij.</div>
-}
-
-            </div>
-}
-            <div class="col-md-6">
-                <h3><b>Studenti na kolegiju</b></h3>
-                
-                @if (Model.studentiNaKolegiju.Count() > 0)
-    {
-        foreach (var item in Model.studentiNaKolegiju)
-        {
-            using (Html.BeginForm("RemoveFromKolegij", "Student", new { studentId = item.Id, kolegijId = Model.kolegijStudent.KolegijId }))
+        }
+        <div class="col-md-6">
+            <h3><b>Studenti na kolegiju</b></h3>
+            <table>
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>JMBAG</th>
+                    <th> </th>
+                </tr>
+            @if (Model.studentiNaKolegiju.Count() > 0)
             {
-                @Html.AntiForgeryToken()
-                <li> - @item.Ime @item.Prezime @item.JMBAG <input type="submit" value="Ukloni" class="btn-sm btn-default"/></li>
-}
-}
-}
-else
-{
-            <li>Nema studenata na ovom kolegiju</li>
-}
+                foreach (var item in Model.studentiNaKolegiju)
+                {
+                    using (Html.BeginForm("RemoveFromKolegij", "Student", new { studentId = item.Id, kolegijId = Model.kolegijStudent.KolegijId }))
+                    {
+                        @Html.AntiForgeryToken()
+                <tr>
 
-            </div>
-         </div>
+                    <td>@item.Ime</td>
+                    <td>@item.Prezime</td>
+                    <td>@item.JMBAG </td>
+
+                    <td><input type="submit" value="Ukloni" class="btn-sm btn-default" /></td>
+                </tr>
+                    }
+                }
+            }
+            </table>
+
+        </div>
     </div>
+</div>
 
 <div class="col-md-12">
     @Html.ActionLink("Natrag na popis kolegija", "Index", "Profesor")

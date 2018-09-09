@@ -21,6 +21,9 @@ namespace Studfile.Models
         public DbSet<Kolegij> Kolegij { get; set; }
         public DbSet<KolegijProfesor> KolegijProfesor { get; set; }
         public DbSet<KolegijStudent> KolegijStudents { get; set; }
+        public DbSet<TimSeminarDatumSeminar> TimSeminarDatumSeminars { get; set; }
+        public DbSet<Tim> Tims { get; set; }
+        public DbSet<StudentTim> StudentTims { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

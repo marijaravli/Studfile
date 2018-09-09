@@ -43,9 +43,16 @@
                     @Html.DisplayFor(modelItem => item.BrojStudenata)
                 </td>
                 <td>
-                    @Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Obriši", "Delete", new { id = item.Id }) |
-                    <a href="@Url.Action("AddToKolegij", "Student", new {  id = item.Id})"><i class="fa fa-user-plus"></i></a> |
+                    @*@Html.ActionLink("Uredi", "Edit", new { id = item.Id }) |*@
+
+                    @using (Html.BeginForm("Delete", "Kolegij", new { id = item.Id }))
+    {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Obriši" class="btn-link" />
+} |
+
+
+                    <a href="@Url.Action("AddToKolegij", "Student", new { id = item.Id })"><i class="fa fa-user-plus"></i></a> |
                     <a href="@Url.Action("CreateForKolegij", "Seminar", new { id = item.Id })"><i class="fa fa-pencil"></i></a> |
                     <a href="@Url.Action("CreateForKolegij", "SeminarDatum", new { id = item.Id })"><i class="fa fa-calendar"></i></a>
                 </td>
@@ -59,11 +66,3 @@
 </table>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-@*<div class="icon-bar">
-        <a href="@Url.Action("Create", "Kolegij")"><i class="fa fa-book"><br /><span class="tekst">Unos kolegija</span></i></a>
-
-        <a href="#"><i class="fa fa-table"><br /><span class="tekst">Odabrane teme</span></i></a>
-    </div>*@

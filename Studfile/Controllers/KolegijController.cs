@@ -72,26 +72,25 @@ namespace Studfile.Controllers
                 return View();
             }
         }
-
-        // GET: Kolegij/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
+        
         // POST: Kolegij/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                Kolegij kolegijZaObrisat = db.Kolegij.FirstOrDefault(k => k.Id == id); 
+                if (kolegijZaObrisat != null)
+                {
+                    db.Kolegij.Remove(kolegijZaObrisat);
+                    db.SaveChanges();
+                }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Profesor");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Profesor");
             }
         }
     }

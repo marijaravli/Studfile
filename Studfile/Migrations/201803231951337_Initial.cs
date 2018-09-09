@@ -45,8 +45,11 @@ namespace Studfile.Migrations
                c => new
                {
                    Id = c.Int(nullable: false, identity: true),
-                   Naziv = c.Int(nullable: false)
+                   Naziv = c.String(nullable: false),
+                   KolegijId = c.Int(nullable: false)
                })
+               .ForeignKey("dbo.Kolegijs", t => t.KolegijId, cascadeDelete: true)
+               .Index(t => t.KolegijId)
                .PrimaryKey(t => t.Id);
 
             CreateTable(
@@ -140,6 +143,8 @@ namespace Studfile.Migrations
 
         public override void Down()
         {
+            DropForeignKey("dbo.Tims", "KolegijId", "dbo.Kolegijs");
+
             DropForeignKey("dbo.StudentTims", "StudentId", "dbo.Students");
             DropForeignKey("dbo.StudentTims", "TimId", "dbo.Tims");
 
@@ -157,7 +162,9 @@ namespace Studfile.Migrations
             DropForeignKey("dbo.TimSeminarDatumSeminars", "TimId", "dbo.Tims");
             DropForeignKey("dbo.TimSeminarDatumSeminars", "VrijemeIzlaganjaId", "dbo.SeminarDatums");
             
+
             // Dropping indexes
+            DropIndex("dbo.Tims", new[] { "KolegijId" });
             DropIndex("dbo.StudentTims", new[] { "StudentId" });
             DropIndex("dbo.StudentTims", new[] { "TimId" });
             DropIndex("dbo.KolegijProfesors", new[] { "ProfesorId" });
