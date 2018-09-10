@@ -253,10 +253,10 @@ namespace Studfile.Controllers
                 .Select(ts => ts.tim)
                 .FirstOrDefault(t => t.KolegijId == odabraniKolegij.Id);
 
-            // Kreirajmo timSeminarDatumSeminar koji cemo slati nazad kad student sve odabere kroz formu
+            // Kreiranje timSeminarDatumSeminar koji cemo slati nazad kad student sve odabere kroz formu
             TimSeminarDatumSeminar timSeminarDatumSeminar = new TimSeminarDatumSeminar();
 
-            // Mozemo traziti clanove tek kad imamo napravljen kolegij
+            // Trazenje clanova tek kad postoji napravljen kolegij
             // inace ce ovo dolje 'timZaKolegij.id' baciti gresku jer ne postoji timZaKolegij
             IEnumerable<Student> clanoviTima = new List<Student>();
             Seminar odabraniSeminar = null;
@@ -277,7 +277,7 @@ namespace Studfile.Controllers
                     .Select(st => st.student)
                     .ToList();
 
-                // Pronađimo Seminar ako smo već odabrali
+                // Pronci Seminar ako smo već odabrali
                 odabraniSeminar = db.Seminar
                     .Join(
                         db.TimSeminarDatumSeminars,
@@ -289,7 +289,7 @@ namespace Studfile.Controllers
                         .Select(joinedTables => joinedTables.seminar)
                         .FirstOrDefault();
 
-                // Pronađimo SeminarDatum ako smo već odabrali
+                // Pronaci SeminarDatum ako smo već odabrali
                 odabraniSeminarDatum = db.SeminarDatum
                     .Join(
                         db.TimSeminarDatumSeminars,
@@ -302,7 +302,7 @@ namespace Studfile.Controllers
                         .FirstOrDefault();
             }
 
-            // Dohvatimo sve zauzete seminare da mozemo filtrirati ostale
+            // Dohvacanje svih zauzetih seminara da se mogu filtrirati ostali
             IEnumerable<Seminar> zauzetiSeminariKolegija = db.Seminar
                 .Where(s => s.KolegijId == kolegijId)
                 .Join(
@@ -313,7 +313,7 @@ namespace Studfile.Controllers
                 )
                 .Select(joinedTables => joinedTables.seminar);
 
-            // Dohvatimo sve slobodne seminare
+            // Dohvacanje svi slobodni seminara
             IEnumerable<SelectListItem> slobodniSeminari = null;
             if (odabraniSeminar != null)
             {
@@ -332,7 +332,7 @@ namespace Studfile.Controllers
             }
 
 
-            // Dohvatimo sve zauzete datume da mozemo filtrirati ostale
+            // Dohvacanje svih zauzetih datuae da mozemo filtrirati ostale
             IEnumerable<SeminarDatum> zauzetiDatumiKolegija = db.SeminarDatum
                 .Where(sd => sd.KolegijId == kolegijId)
                 .Join(
@@ -343,7 +343,7 @@ namespace Studfile.Controllers
                 )
                 .Select(joinedTables => joinedTables.seminarDatum);
 
-            // Dohvatimo sve slobodne seminare
+            // Dohvacanje svih slobodni seminara
             IEnumerable<SelectListItem> slobodniSeminarDatumi = null;
 
             if (odabraniSeminarDatum != null)
@@ -357,7 +357,7 @@ namespace Studfile.Controllers
             {
                 slobodniSeminarDatumi = db.SeminarDatum
                     .Where(sd => sd.KolegijId == kolegijId)
-                    .Where(sd => !zauzetiDatumiKolegija.Contains(sd)) // zaboravio sam to maknit...
+                    .Where(sd => !zauzetiDatumiKolegija.Contains(sd)) 
                     .Select(sd => new SelectListItem { Text = sd.TerminIzlaganja.ToString(), Value = sd.Id.ToString() });
             }
 

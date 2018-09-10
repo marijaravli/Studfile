@@ -170,7 +170,8 @@ namespace Studfile.Controllers
             var model = db.StudentSeminar
                 .Include(s => s.Student)
                 .Include(r => r.Seminar)
-                .Select(x => new StudentKolegijViewModel() { Ime = x.Student.Ime, Prezime = x.Student.Prezime, Kolegij = x.Seminar.TemaSeminara, StudentId = x.Student.Id }  );
+                .Select(x => new StudentKolegijViewModel()
+                { Ime = x.Student.Ime, Prezime = x.Student.Prezime, Kolegij = x.Seminar.TemaSeminara, StudentId = x.Student.Id }  );
             return View(model);
         }
 

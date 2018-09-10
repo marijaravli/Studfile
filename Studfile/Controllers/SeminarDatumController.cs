@@ -22,15 +22,13 @@ namespace Studfile.Controllers
             }
             else if (User.IsInRole("Student"))
             {
-                return null; //  DohvatiSveStudentoveSeminare();
+                return null;
             }
             else
-            {
-                // Ako nije ni student ni profesor neka se prijavi!
+            {                
                 return RedirectToAction("Login", "Account");
             }
         }
-
         private ActionResult DohvatiSveProfesoroveZakazaneSeminare()
         {
             string id = HttpContext.User.Identity.GetUserId();
@@ -39,36 +37,41 @@ namespace Studfile.Controllers
             {
                 return RedirectToAction("Create", "Profesor");
             }
-
             IEnumerable<SeminarDatumListViewModel> datumi = db.SeminarDatum
-                .Join(db.Kolegij, sd => sd.KolegijId, k => k.Id, (seminarDatum, kolegij) => new { seminarDatum = seminarDatum, kolegij = kolegij })
-                 .Join(db.KolegijProfesor, sdk => sdk.kolegij.Id, kp => kp.KolegijId, (sdk, kp) => new { seminarDatum = sdk.seminarDatum, profesorId = kp.ProfesorId, kolegij = sdk.kolegij })
                 .Join(
+                db.Kolegij,
+                sd => sd.KolegijId,
+                k => k.Id,
+                (seminarDatum, kolegij) => new { seminarDatum = seminarDatum, kolegij = kolegij })
+                .Join(db.KolegijProfesor,
+                 sdk => sdk.kolegij.Id,
+                 kp => kp.KolegijId,
+                 (sdk, kp) => new { seminarDatum = sdk.seminarDatum, profesorId = kp.ProfesorId, kolegij = sdk.kolegij })
+                 .Join(
                     db.TimSeminarDatumSeminars,
                     spk => spk.seminarDatum.Id,
                     tsds => tsds.VrijemeIzlaganjaId,
-                    (spk, tsds) => new { seminarDatum = spk.seminarDatum, profesorId = spk.profesorId, kolegij = spk.kolegij, timId = tsds.TimId, seminarId = tsds.SeminarId }
-                )
+                    (spk, tsds) => new { seminarDatum = spk.seminarDatum, profesorId = spk.profesorId, kolegij = spk.kolegij, timId = tsds.TimId, seminarId = tsds.SeminarId })
                 .Join(
                     db.Tims,
                     all => all.timId,
                     t => t.Id,
-                    (all, t) => new { seminarDatum = all.seminarDatum, profesorId = all.profesorId, kolegij = all.kolegij, Tim = t, seminarId = all.seminarId }
-                )
+                    (all, t) => new { seminarDatum = all.seminarDatum, profesorId = all.profesorId, kolegij = all.kolegij, Tim = t, seminarId = all.seminarId })
                 .Join(
                     db.Seminar,
                     all => all.seminarId,
                     s => s.Id,
-                    (all, s) => new { seminarDatum = all.seminarDatum, profesorId = all.profesorId, kolegij = all.kolegij, Tim = all.Tim, Seminar = s }
-                 )
+                    (all, s) => new { seminarDatum = all.seminarDatum, profesorId = all.profesorId, kolegij = all.kolegij, Tim = all.Tim, Seminar = s })
                 .Where(joinedTables => joinedTables.profesorId == prof.Id)
                 .Select(x => new SeminarDatumListViewModel
                 {
                     Kolegij = x.kolegij,
                     Seminar = x.Seminar,
                     SeminarDatum = x.seminarDatum,
-                    Studenti = db.Student.Join(db.StudentTims, s => s.Id, st => st.StudentId, (s, st) => new { student = s, timId = st.TimId }).Where(st => st.timId == x.Tim.Id).Select(st => st.student),
-                    Tim = x.Tim
+                    Studenti = db.Student.Join(db.StudentTims, s => s.Id, st => st.StudentId, (s, st) => new { student = s, timId = st.TimId })
+                                    .Where(st => st.timId == x.Tim.Id)
+                                    .Select(st => st.student),
+                                    Tim = x.Tim
                 }).ToList();
 
             return View(datumi);

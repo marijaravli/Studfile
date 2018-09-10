@@ -63,9 +63,6 @@ namespace Studfile.Controllers
                  .ToList()
                  .Select(k => new SelectListItem { Text = k.Naziv, Value = k.Id.ToString() });
 
-            /*IEnumerable<SelectListItem> studenti = db.Student
-                .Join(
-                    )*/
 
             var kolegijStudentViewModels = new KolegijStudentViewModel { kolegij = kolegij, kolegijStudent = new KolegijStudent { } };
 

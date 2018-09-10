@@ -25,6 +25,8 @@
         </div>
     </div>
     <div class="form-group">
+        <h6 class="margine3">Lozinka mora sadržavati najmanje 6 znakova te mora<br/> imati velika i mala slova, brojeve i simbole (#, $, *, &...).</h6>
+
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })

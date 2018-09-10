@@ -299,15 +299,12 @@
     <Content Include="Views\Profesor\Edit.cshtml" />
     <Content Include="Views\Profesor\Index.cshtml" />
     <Content Include="Views\Home\Onama.cshtml" />
-    <Content Include="Views\Profesor\UnosStudenata.cshtml" />
     <Content Include="Views\Profesor\TablicaStudenti.cshtml" />
-    <Content Include="Views\Profesor\UnosTema.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Profesor\TerminClanovi.cshtml" />
     <Content Include="Views\Kolegij\Create.cshtml" />
     <Content Include="Views\SeminarDatum\Create.cshtml" />
     <Content Include="Views\SeminarDatum\Index.cshtml" />

@@ -55,7 +55,7 @@ namespace Studfile.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Lozinka")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -65,7 +65,7 @@ namespace Studfile.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Type")]
+        [Display(Name = "Uloga")]
         public UserType Type { get; set; }
 
 
@@ -77,11 +77,11 @@ namespace Studfile.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Lozinka")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Potvrda lozinke")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

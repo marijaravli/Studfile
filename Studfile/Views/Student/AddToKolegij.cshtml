@@ -5,11 +5,7 @@
 }
 
 <h2>Upisivanje studenata u kolegij</h2>
-
-
-
 <div class="form-horizontal">
-
     <hr />
     <div class="row">
         @using (Html.BeginForm())
@@ -19,7 +15,6 @@
                 <h6>Odaberite studenta kojeg želite upisati u kolegij te potvrdite pritiskom na gumb "Upiši".</h6>
                 @if (Model.students.Count() > 0)
                 {
-
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(model => model.kolegijStudent.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -27,7 +22,6 @@
                             @Html.DropDownListFor(model => model.kolegijStudent.StudentId, new SelectList(Model.students, "Value", "Text"), new { @class = "form-control" })
                         </div>
                     </div>
-
                     @Html.HiddenFor(moodel => Model.kolegijStudent.KolegijId)
 
                     <div class="form-group">
